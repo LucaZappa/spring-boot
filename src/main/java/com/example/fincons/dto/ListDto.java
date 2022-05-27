@@ -50,16 +50,6 @@ public class ListDto implements Serializable  {
 		return serialVersionUID;
 	}
 	
-	/*
-	public ListDto fromEntity(ListTodo entity) {
-		this.id = entity.getId();
-		this.todo = entity.getTodo();
-		this.status = entity.getStatus();
-		this.datacreazione = entity.getDateCreazione();
-		this.datafine = entity.getDataFine();
-		return this;
-		
-	}*/
 	
 	
 	

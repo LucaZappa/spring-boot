@@ -3,6 +3,8 @@ package com.example.fincons.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.fincons.controllers.ListController;
 import com.example.fincons.dto.ListDto;
 import com.example.fincons.entities.ListTodo;
 import com.example.fincons.repository.ListDao;
@@ -18,6 +21,9 @@ import com.example.fincons.utils.ListUtils;
 ////Questo è un servizio 
 @Service
 public class ListServiceImpl implements ListService {
+	
+	private static Logger logger=LoggerFactory.getLogger(ListServiceImpl.class);
+
 	
 	// fai l'injection dei get and setter nella userserviceimpl 
 	@Autowired
@@ -66,7 +72,8 @@ public class ListServiceImpl implements ListService {
 	        
 	        default:{   
 	        	
-	            System.out.println("Devi inseriri solo: TODO, IN_PROGRESS oppure DONE  ");
+	            
+	            logger.warn("Devi inseriri solo: TODO, IN_PROGRESS oppure DONE");
 	            } 
 	        }
 		  System.out.println(dto.getStatus());
@@ -90,7 +97,7 @@ public class ListServiceImpl implements ListService {
 		}
 		catch (Exception e) {
 			
-			System.out.println("Errore");
+			logger.warn("Errore");
 			
 		}
 		
@@ -110,18 +117,21 @@ public class ListServiceImpl implements ListService {
 		System.out.println(string);
 		  switch(string){  
 	        case "TODO":{  
-	        	nLst.setStatus(dto.getStatus());;
+	        	nLst.setStatus(dto.getStatus());
+	        	break;
 	            }  
 	        case "IN_PROGRESS":{  
 	        	nLst.setStatus(dto.getStatus());
+	        	break;
 	            }  
 	        case "DONE":{  
 	        	nLst.setStatus(dto.getStatus());
+	        	break;
 	            }
 	        
 	        default:{   
 	        	
-	            System.out.println("Devi inseriri solo: TODO, IN_PROGRESS oppure DONE  ");
+	        	logger.warn("Devi inseriri solo: TODO, IN_PROGRESS oppure DONE  ");
 	            nLst.setStatus("TODO");
 	            } 
 	        }
@@ -136,7 +146,7 @@ public class ListServiceImpl implements ListService {
 		}
 		catch (Exception e) {
 			
-			System.out.println("Errore");
+			logger.warn("Errore");
 			return null;
 		}
 	}
